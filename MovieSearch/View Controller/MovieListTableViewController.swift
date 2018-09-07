@@ -23,15 +23,10 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
     
     //MARK: - Helper method for search bar and loading
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("search button pressed")
-        
-            self.navigationController?.title = searchBar.text
+    
             self.loadMovies()
-            self.searchBar.text = ""
-            print("about resign")
-            self.resignFirstResponder()
-            print("resigned")
-        
+         self.navigationController?.title = self.searchBar.text
+        navigationController?.title = searchBar.text
         
     }
     
@@ -43,7 +38,13 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
             if success {
                 print("🤩🤩🤩🤩🤩🤩")
                 DispatchQueue.main.async {
-                    
+                    // i had those in the searchBarButtonClicked() - but it still doesnt work
+                   
+                    // this one works
+                    self.searchBar.text = ""
+                    // this one doesnt
+                    self.resignFirstResponder()
+                    //not this one was here and it works
                     self.tableView.reloadData()
                 }
             } else {

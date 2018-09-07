@@ -12,7 +12,7 @@
         <!--(search word)-->
         <scene sceneID="sCg-ck-Nie">
             <objects>
-                <tableViewController id="RET-LC-Sam" sceneMemberID="viewController">
+                <tableViewController id="RET-LC-Sam" customClass="MovieListTableViewController" customModule="MovieSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5pq-xf-48m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +23,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="510" id="Sc8-Sx-t8Y">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="movieCell" rowHeight="510" id="Sc8-Sx-t8Y" customClass="ShowMovieTableViewCell" customModule="MovieSearch" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="510"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sc8-Sx-t8Y" id="W2y-Fb-MYr">
@@ -58,6 +58,12 @@
                                         </textView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="movieOverviewTextView" destination="Zri-1R-Idv" id="8cT-X2-XqU"/>
+                                    <outlet property="moviePosterImageView" destination="UxV-93-dw4" id="uYl-op-3e0"/>
+                                    <outlet property="movieRatingLabel" destination="bhG-1L-i7v" id="avW-Zf-X7G"/>
+                                    <outlet property="movieTitleLabel" destination="d3O-Z2-8JD" id="JVa-Xw-zW4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -66,6 +72,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="(search word)" id="cTH-Ib-8N4"/>
+                    <connections>
+                        <outlet property="searchBar" destination="bH6-s8-JvC" id="2Dv-rF-SA4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZx-V9-UGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

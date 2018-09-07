@@ -115,10 +115,6 @@ class MovieController {
 //              }
 //
     
-            
-            
-            
-            
 }
         
         
@@ -145,6 +141,6 @@ class MovieController {
     
     
     
-}
+
 
 

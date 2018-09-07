@@ -8,12 +8,17 @@
 
 import Foundation
 
+struct JsonDictionary: Decodable {
+    let results : [Movie]
+}
 
-struct Movie {
+
+struct Movie: Decodable {
+    
     let title: String
     let overview: String
-    let rating: Int
-    let posterImage: String
+    let rating: Double
+    let posterImage: String?
     
     private enum CodingKeys: String, CodingKey {
         case title = "original_title"
@@ -23,10 +28,4 @@ struct Movie {
         
         
     }
-    
-    
-    
-    
-    
-    
 }

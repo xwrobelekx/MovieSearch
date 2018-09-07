@@ -9,16 +9,48 @@
 import UIKit
 
 class ShowMovieTableViewCell: UITableViewCell {
-
+    
+    
+    //MARK: - Properties
+    
+    @IBOutlet weak var movieTitleLabel: UILabel!
+    @IBOutlet weak var movieRatingLabel: UILabel!
+    @IBOutlet weak var moviePosterImageView: UIImageView!
+    @IBOutlet weak var movieOverviewTextView: UITextView!
+    
+    
+    
+    var movieToDispaly: Movie? {
+        didSet {
+            
+            updateViews()
+        }
+    }
+    
+    
+    //MARK: - LifeCycle Methods
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    
+    //MARK: - Helper Methods
+    
+    func updateViews() {
+        guard let movie = movieToDispaly else {return}
+        movieTitleLabel.text = movie.title
+        movieRatingLabel.text = "Rating: \(movie.rating)"
+        movieOverviewTextView.text = movie.overview
+        
+        //FIXME: add image
+        MovieController.shared.fetchPosters(movie: movie) { (image) in
+            DispatchQueue.main.async {
+                self.moviePosterImageView.image = image
+                
+            }
+        }
+        
     }
-
 }

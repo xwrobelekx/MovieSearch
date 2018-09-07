@@ -45,6 +45,12 @@ class ShowMovieTableViewCell: UITableViewCell {
         movieOverviewTextView.text = movie.overview
         
         //FIXME: add image
+        MovieController.shared.fetchPosters(movie: movie) { (image) in
+            DispatchQueue.main.async {
+                self.moviePosterImageView.image = image
+                
+            }
+        }
         
     }
 }

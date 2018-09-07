@@ -22,11 +22,19 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     //MARK: - Helper method for search bar and loading
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-      loadMovies()
-
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("search button pressed")
+        
+            self.navigationController?.title = searchBar.text
+            self.loadMovies()
+            self.searchBar.text = ""
+            print("about resign")
+            self.resignFirstResponder()
+            print("resigned")
+        
+        
     }
+    
     
     func loadMovies() {
         
@@ -34,6 +42,10 @@ class MovieListTableViewController: UITableViewController, UISearchBarDelegate {
         MovieController.shared.fetchMovie(movieTitle: searchTerm) { (success) in
             if success {
                 print("🤩🤩🤩🤩🤩🤩")
+                DispatchQueue.main.async {
+                    
+                    self.tableView.reloadData()
+                }
             } else {
                 print("😱😱😱😱😱😱")
             }

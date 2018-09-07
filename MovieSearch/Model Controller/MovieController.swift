@@ -74,8 +74,13 @@ class MovieController {
             //decode data?
             
             do {
-                let decodedMovies = try JSONDecoder().decode([Movie].self, from: data)
-                self.fetchedMovies = decodedMovies
+                let decodedMovies = try JSONDecoder().decode(JsonDictionary.self, from: data)
+                //let posts = json.data.children.compactMap({ $0.post }
+                //let movies = decodedMovies.results.compactMap({ $0})
+               // let movies = decodedMovies.
+                self.fetchedMovies = decodedMovies.results
+                
+                
                 completion(true)
                 
             } catch {
@@ -88,32 +93,40 @@ class MovieController {
         
     }
     
-//
-//    func fetchPosters(movie: Movie, completion: @escaping(UIImage?) -> Void){
-//
-//
-//
-//
-//        URLSession.shared.dataTask(with: <#T##URL#>) { (data, _, error) in
-//
-//            URLSession.shared.dataTask(with: Movie.posterImage ) { (data, _, error) in
-//
-//                do{
-//                    if let error = error {
-//                        throw error
-//                    }
-//                    guard let data = data else { throw NSError()}
-//                    let image = UIImage(data: data)
-//                    completion(image)
-//                }catch {
-//                    print("There was an error on \(#function): \(error) \(error.localizedDescription)")
-//                    completion(nil)
-//                    return
-//                }
-//
-//                }.resume()
-//              }
-//
+
+    func fetchPosters(movie: Movie, completion: @escaping(UIImage?) -> Void){
+
+        //need url to add poster url to it
+        let baseURL = URL(string: "https://image.tmdb.org/t/p/w500/")
+        guard let unwrappedURL = baseURL else {return}
+        
+        guard let imageURLComponent = movie.posterImage else {return}
+        
+        let buildURL = unwrappedURL.appendingPathComponent(imageURLComponent)
+        
+        print(buildURL)
+        
+
+
+        URLSession.shared.dataTask(with: buildURL) { (data, _, error) in
+
+
+                do{
+                    if let error = error {
+                        throw error
+                    }
+                    guard let data = data else { throw NSError()}
+                    let image = UIImage(data: data)
+                    completion(image)
+                }catch {
+                    print("There was an error on \(#function): \(error) \(error.localizedDescription)")
+                    completion(nil)
+                    return
+                }
+
+                }.resume()
+              }
+
     
 }
         
